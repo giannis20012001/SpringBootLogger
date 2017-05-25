@@ -29,7 +29,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>org.lumi.microservices</mainClass>
+                    <mainClass>org.lumi.microservices.eureka.Application</mainClass>
                     <addResources>true</addResources>
                 </configuration>
                 <executions>
