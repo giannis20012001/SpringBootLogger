@@ -1,5 +1,7 @@
 package org.lumi.microservices.customer.api;
 
+import net.logstash.logback.argument.StructuredArgument;
+import net.logstash.logback.argument.StructuredArguments;
 import org.lumi.microservices.customer.intercomm.AccountClient;
 import org.lumi.microservices.customer.model.Account;
 import org.lumi.microservices.customer.model.Customer;
@@ -39,7 +41,9 @@ public class Api {
         logger.info("Customer.findAll()");
         logger.info(String.format("Customer.findAll: %s", customers));
         Instant end = Instant.now();
-        logger.info(String.format("Tieme to find all customers: %s", Duration.between(start, end)));
+        Duration time = Duration.between(start, end);
+        StructuredArgument timeArgument = StructuredArguments.value("time", time);
+        logger.info("Time to find all customers: '{}'", timeArgument);
 
         return customers;
 
@@ -79,4 +83,5 @@ public class Api {
     private AccountClient accountClient;
     protected static Logger logger = LoggerFactory.getLogger(Api.class.getName());
     private List<Customer> customers;
+
 }
