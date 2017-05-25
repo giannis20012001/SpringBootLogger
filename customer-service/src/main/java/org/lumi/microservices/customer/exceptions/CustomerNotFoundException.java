@@ -1,4 +1,4 @@
-package org.lumi.microservices.account.exceptions;
+package org.lumi.microservices.customer.exceptions;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 
 @ResponseStatus(org.springframework.http.HttpStatus.NOT_FOUND)
-public class AccountNotFoundException extends Exception {
-    public AccountNotFoundException(String accountNumber) {
-        super("No such account: " + accountNumber);
+public class CustomerNotFoundException extends Exception {
+    public CustomerNotFoundException(String pesel) {
+        super("No such customer: " + pesel);
 
     }
 

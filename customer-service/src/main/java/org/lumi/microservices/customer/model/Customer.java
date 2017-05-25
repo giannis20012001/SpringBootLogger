@@ -1,14 +1,16 @@
-package org.lumi.microservices.account.model;
+package org.lumi.microservices.customer.model;
+
+import java.util.List;
 
 /**
  * Created by John Tsantilis
  * (i [dot] tsantilis [at] yahoo [dot] com A.K.A lumi) on 25/5/2017.
  */
 
-public class Account {
+public class Customer {
     @Override
     public String toString() {
-        return String.format("Account [id=%d, number='%s', customerId=%d]", id, number, customerId);
+        return String.format("Customer [id=%d, pesel='%s', name='%s']", id, pesel, name);
 
     }
 
@@ -25,23 +27,43 @@ public class Account {
 
     }
 
-    public Integer getCustomerId() {
-        return customerId;
+    public String getPesel() {
+        return pesel;
 
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
 
     }
 
-    public String getNumber() {
-        return number;
+    public String getName() {
+        return name;
 
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setName(String name) {
+        this.name = name;
+
+    }
+
+    public CustomerType getType() {
+        return type;
+
+    }
+
+    public void setType(CustomerType type) {
+        this.type = type;
+
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
 
     }
 
@@ -51,7 +73,7 @@ public class Account {
     /**
      * Default constructor
      */
-    public Account() {
+    public Customer() {
         //Do nothing
 
     }
@@ -59,10 +81,11 @@ public class Account {
     /**
      * Parametrized constructor
      */
-    public Account(Integer id, Integer customerId, String number) {
+    public Customer(Integer id, String pesel, String name, CustomerType type) {
         this.id = id;
-        this.customerId = customerId;
-        this.number = number;
+        this.pesel = pesel;
+        this.name = name;
+        this.type = type;
 
     }
 
@@ -70,7 +93,9 @@ public class Account {
     //Class variables
     //=================================================================================================================
     private Integer id;
-    private Integer customerId;
-    private String number;
+    private String pesel;
+    private String name;
+    private CustomerType type;
+    private List<Account> accounts;
 
 }

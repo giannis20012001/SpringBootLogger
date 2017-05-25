@@ -1,4 +1,4 @@
-package org.lumi.microservices.account.model;
+package org.lumi.microservices.customer.model;
 
 /**
  * Created by John Tsantilis
@@ -8,7 +8,7 @@ package org.lumi.microservices.account.model;
 public class Account {
     @Override
     public String toString() {
-        return String.format("Account [id=%d, number='%s', customerId=%d]", id, number, customerId);
+        return String.format("Account [id=%d, number='%s']", id, number);
 
     }
 
@@ -22,16 +22,6 @@ public class Account {
 
     public void setId(Integer id) {
         this.id = id;
-
-    }
-
-    public Integer getCustomerId() {
-        return customerId;
-
-    }
-
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
 
     }
 
@@ -59,9 +49,9 @@ public class Account {
     /**
      * Parametrized constructor
      */
-    public Account(Integer id, Integer customerId, String number) {
+    public Account(Integer id, String number) {
+        super();
         this.id = id;
-        this.customerId = customerId;
         this.number = number;
 
     }
@@ -70,7 +60,6 @@ public class Account {
     //Class variables
     //=================================================================================================================
     private Integer id;
-    private Integer customerId;
     private String number;
 
 }
