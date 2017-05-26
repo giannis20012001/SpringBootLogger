@@ -1,7 +1,6 @@
 package org.lumi.microservices.customer.api;
 
 import net.logstash.logback.argument.StructuredArgument;
-import net.logstash.logback.argument.StructuredArguments;
 import org.lumi.microservices.customer.intercomm.AccountClient;
 import org.lumi.microservices.customer.model.Account;
 import org.lumi.microservices.customer.model.Customer;
@@ -13,10 +12,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.SecureRandom;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.logstash.logback.argument.StructuredArguments.value;
 
 /**
  * Created by John Tsantilis
@@ -41,9 +43,8 @@ public class Api {
         logger.info("Customer.findAll()");
         logger.info(String.format("Customer.findAll: %s", customers));
         Instant end = Instant.now();
-        Duration time = Duration.between(start, end);
-        StructuredArgument timeArgument = StructuredArguments.value("time", time);
-        logger.info("Time to find all customers: '{}'", timeArgument);
+        StructuredArgument customerTimeArgument = value("customerTimeArgument", Duration.between(start, end).toMillis());
+        logger.info("The /customers REST path took: {} milliseconds to complete", customerTimeArgument);
 
         return customers;
 
@@ -51,11 +52,16 @@ public class Api {
 
     @RequestMapping("/customers/{id}")
     public Customer findById(@PathVariable("id") Integer id) {
+        Instant start = Instant.now();
         logger.info(String.format("Customer.findById(%s)", id));
         Customer customer = customers.stream().filter(it -> it.getId().intValue()==id.intValue()).findFirst().get();
         List<Account> accounts =  accountClient.getAccounts(id);
         customer.setAccounts(accounts);
         logger.info(String.format("Customer.findById: %s", customer));
+        Instant end = Instant.now();
+        StructuredArgument customerByIdTimeArgument = value("customerByIdTimeArgument",
+                Duration.between(start, end).toMillis());
+        logger.info("The /customers/(id) REST path took: {} milliseconds to complete", customerByIdTimeArgument);
 
         return customer;
 
@@ -83,5 +89,6 @@ public class Api {
     private AccountClient accountClient;
     protected static Logger logger = LoggerFactory.getLogger(Api.class.getName());
     private List<Customer> customers;
+    private SecureRandom randomNumbers = new SecureRandom();
 
 }

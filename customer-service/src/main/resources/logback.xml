@@ -20,7 +20,7 @@
                         to make filtering easier in Logstash or searching with Kibana -->
                         {
                         "serviceName": "customer-service"
-                        <!--"timeArgument": "${org.lumi.microservices.customer.api.Api.timeArgument}"-->
+                        <!--"timeArgument": "%timeArgument"-->
                         }
                     </pattern>
                 </pattern>
